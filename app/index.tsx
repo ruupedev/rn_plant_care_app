@@ -1,10 +1,13 @@
 import { Alert, Text } from "react-native";
 import { Link } from "expo-router";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import { styles } from "../styles/style";
+
 import { FAB } from "react-native-paper";
 import * as ImagePicker from "expo-image-picker";
 import { useState } from "react";
+
+import { styles } from "../styles/style";
+import type { Plant } from "../types/plant";
 
 export default function HomeScreen() {
   const [image, setImage] = useState<string | null>(null);
@@ -18,6 +21,10 @@ export default function HomeScreen() {
     }
 
     let res = await ImagePicker.launchImageLibraryAsync();
+
+    if (!res.canceled) {
+      setImage(res.assets[0].uri);
+    }
 
     console.log(res);
   };
