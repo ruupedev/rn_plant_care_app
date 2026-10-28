@@ -13,6 +13,7 @@ export default function RootLayout() {
       >
         <Stack.Screen name="index" options={{ title: "Kasvini" }} />
         <Stack.Screen name="details" options={{ title: "Tiedot" }} />
+        <Stack.Screen name="add" options={{ title: "Lisää" }} />
       </Stack>
     </PaperProvider>
   );

@@ -16,4 +16,10 @@ export const styles = StyleSheet.create({
     right: 16,
     bottom: 16,
   },
+  image: {
+    width: "90%",
+    aspectRatio: 1,
+    borderRadius: 12,
+    margin: 20,
+  },
 });

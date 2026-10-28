@@ -1,7 +1,6 @@
 import { Alert, Text } from "react-native";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-
 import { FAB } from "react-native-paper";
 import * as ImagePicker from "expo-image-picker";
 import { useState } from "react";
@@ -23,7 +22,11 @@ export default function HomeScreen() {
     let res = await ImagePicker.launchImageLibraryAsync();
 
     if (!res.canceled) {
-      setImage(res.assets[0].uri);
+      /*     setImage(res.assets[0].uri); */
+      router.push({
+        pathname: "/add",
+        params: { imageUri: res.assets[0].uri },
+      });
     }
 
     console.log(res);
