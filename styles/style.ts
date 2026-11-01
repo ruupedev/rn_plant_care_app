@@ -28,4 +28,20 @@ export const styles = StyleSheet.create({
     borderRadius: 12,
     margin: 20,
   },
+  resultRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+  },
+  resultImage: {
+    width: 160,
+    height: 160,
+    borderRadius: 8,
+  },
+  resultText: {
+    flex: 1,
+  },
+  scientific: {
+    fontStyle: "italic",
+  },
 });

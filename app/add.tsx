@@ -2,9 +2,10 @@ import { useLocalSearchParams } from "expo-router";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { Image } from "expo-image";
 import { styles } from "../styles/style";
-import { Alert, Text, Button } from "react-native";
+import { Alert, View } from "react-native";
 import { File } from "expo-file-system";
 import { useState } from "react";
+import { Card, Button, Text } from "react-native-paper";
 
 const apiKeys = {
   plantNetApiKey: process.env.EXPO_PUBLIC_PLANTNET_API_KEY,
@@ -47,14 +48,40 @@ export default function AddScreen() {
           contentFit="cover"
           transition={1000}
         />
-        <Button onPress={identify} title="Fetch" />
-        <Text>{result?.score}</Text>
-        <Text>{result?.species.scientificNameWithoutAuthor}</Text>
-        <Text>{result?.species.commonNames[0]}</Text>
-        <Image
-          source={result?.images?.[0]?.url.s}
-          style={styles.thumbnail}
-        ></Image>
+        {/*  <Button onPress={identify} title="Fetch" /> */}
+        <Button
+          mode="contained"
+          style={{ width: "90%", margin: "auto" }}
+          onPress={identify}
+        >
+          SEARCH
+        </Button>
+        {result && (
+          <Card style={{ width: "90%", margin: "auto", marginTop: 20 }}>
+            <Card.Content style={styles.resultRow}>
+              <Image
+                source={result.images?.[0]?.url.m}
+                style={styles.resultImage}
+                contentFit="cover"
+              />
+              <View style={styles.resultText}>
+                <Text variant="titleMedium">
+                  {result.species.commonNames[0]}
+                </Text>
+                <Text variant="bodyMedium" style={styles.scientific}>
+                  {result.species.scientificNameWithoutAuthor}
+                </Text>
+                <Text variant="labelLarge">
+                  {Math.round(result.score * 100)} %
+                </Text>
+                <View style={{ flexDirection: "row", gap: 5, marginTop: 15 }}>
+                  <Button mode="contained">YES</Button>
+                  <Button mode="contained">NO</Button>
+                </View>
+              </View>
+            </Card.Content>
+          </Card>
+        )}
       </SafeAreaView>
     </SafeAreaProvider>
   );
