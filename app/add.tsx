@@ -6,6 +6,7 @@ import { Alert, View } from "react-native";
 import { File } from "expo-file-system";
 import { useState } from "react";
 import { Card, Button, Text } from "react-native-paper";
+import { addPlant } from "../types/plant";
 
 const apiKeys = {
   plantNetApiKey: process.env.EXPO_PUBLIC_PLANTNET_API_KEY,
@@ -35,6 +36,18 @@ export default function AddScreen() {
       setResult(json.results[0]);
     } catch (error) {
       console.log("ERROR!", error);
+    }
+  };
+
+  const save = async () => {
+    try {
+      const id = await addPlant({
+        name: result.species.commonNames[0],
+        imageUri,
+      });
+      console.log("Saved with id:", id);
+    } catch (error) {
+      console.log("Save failed:", error);
     }
   };
 
@@ -75,7 +88,9 @@ export default function AddScreen() {
                   {Math.round(result.score * 100)} %
                 </Text>
                 <View style={{ flexDirection: "row", gap: 5, marginTop: 15 }}>
-                  <Button mode="contained">YES</Button>
+                  <Button mode="contained" onPress={save}>
+                    YES
+                  </Button>
                   <Button mode="contained">NO</Button>
                 </View>
               </View>
