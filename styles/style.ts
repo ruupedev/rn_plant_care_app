@@ -22,4 +22,10 @@ export const styles = StyleSheet.create({
     borderRadius: 12,
     margin: 20,
   },
+  thumbnail: {
+    width: "60%",
+    aspectRatio: 1,
+    borderRadius: 12,
+    margin: 20,
+  },
 });
