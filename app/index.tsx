@@ -9,7 +9,7 @@ import { styles } from "../styles/style";
 import type { Plant } from "../types/plant";
 
 export default function HomeScreen() {
-  const [image, setImage] = useState<string | null>(null);
+ /*  const [image, setImage] = useState<string | null>(null); */
   const pickImage = async () => {
     const permissionResult =
       await ImagePicker.requestMediaLibraryPermissionsAsync();

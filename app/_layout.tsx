@@ -1,8 +1,22 @@
-import { Stack } from "expo-router";
+import { useEffect } from "react";
+import { Stack, router } from "expo-router";
 import { PaperProvider } from "react-native-paper";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../services/firebase";
 import { colors } from "../styles/style";
 
 export default function RootLayout() {
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        router.replace("/");
+      } else {
+        router.replace("/login");
+      }
+    });
+    return unsubscribe;
+  }, []);
+
   return (
     <PaperProvider>
       <Stack
@@ -13,6 +27,7 @@ export default function RootLayout() {
       >
         <Stack.Screen name="index" options={{ title: "Kasvini" }} />
         <Stack.Screen name="details" options={{ title: "Tiedot" }} />
+        <Stack.Screen name="login" options={{ title: "Kirjaudu" }} />
         <Stack.Screen name="add" options={{ title: "Lisää" }} />
       </Stack>
     </PaperProvider>

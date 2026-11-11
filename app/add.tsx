@@ -10,6 +10,8 @@ import { addPlant } from "../types/plant";
 
 const apiKeys = {
   plantNetApiKey: process.env.EXPO_PUBLIC_PLANTNET_API_KEY,
+  perenualApiKey: process.env.EXPO_PUBLIC_PERENUAL_API_KEY,
+  trefleApiKey: process.env.EXPO_PUBLIC_TREFLE_API_KEY,
 };
 
 export default function AddScreen() {

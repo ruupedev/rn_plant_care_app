@@ -1,5 +1,5 @@
 import { addDoc, collection } from "firebase/firestore";
-import { db } from "../services/firebase";
+import { db, auth } from "../services/firebase";
 
 export type Plant = {
   id: number;
@@ -9,6 +9,7 @@ export type Plant = {
 };
 
 export async function addPlant(plant: { name: string; imageUri: string }) {
-  const docRef = await addDoc(collection(db, "plants"), plant);
+  const uid = auth.currentUser!.uid;
+  const docRef = await addDoc(collection(db, "users", uid, "plants"), plant);
   return docRef.id;
 }
