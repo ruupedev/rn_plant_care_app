@@ -1,4 +1,10 @@
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  getDocs,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
 import { db, auth } from "../services/firebase";
 
 export type Plant = {
@@ -19,4 +25,10 @@ export async function getPlants() {
   const uid = auth.currentUser!.uid;
   const snapshot = await getDocs(collection(db, "users", uid, "plants"));
   return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+}
+
+export async function deletePlant(id: string) {
+  const uid = auth.currentUser!.uid;
+  await deleteDoc(doc(db, "users", uid, "plants", id));
+  return getPlants();
 }

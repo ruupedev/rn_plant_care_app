@@ -1,13 +1,13 @@
 import { Alert, FlatList, View } from "react-native";
 import { Link, router, useFocusEffect } from "expo-router";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import { Card, FAB, Text } from "react-native-paper";
+import { Card, FAB, IconButton, Text } from "react-native-paper";
 import * as ImagePicker from "expo-image-picker";
 import { useState, useCallback } from "react";
 import { Image } from "expo-image";
 
 import { styles } from "../styles/style";
-import { getPlants } from "../types/plant";
+import { getPlants, deletePlant } from "../types/plant";
 
 export default function HomeScreen() {
   const pickImage = async () => {
@@ -56,6 +56,12 @@ export default function HomeScreen() {
                 />
                 <Text variant="titleMedium">{item.name}</Text>
               </Card.Content>
+              <Card.Actions>
+                <IconButton
+                  icon="delete"
+                  onPress={async () => setPlants(await deletePlant(item.id))}
+                />
+              </Card.Actions>
             </Card>
           )}
         />
