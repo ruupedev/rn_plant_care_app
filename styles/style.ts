@@ -44,4 +44,11 @@ export const styles = StyleSheet.create({
   scientific: {
     fontStyle: "italic",
   },
+  list: {
+    gap: 12,
+    paddingBottom: 100,
+  },
+  plantCard: {
+    backgroundColor: "#fff",
+  },
 });

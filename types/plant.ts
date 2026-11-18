@@ -1,4 +1,4 @@
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, getDocs } from "firebase/firestore";
 import { db, auth } from "../services/firebase";
 
 export type Plant = {
@@ -12,4 +12,11 @@ export async function addPlant(plant: { name: string; imageUri: string }) {
   const uid = auth.currentUser!.uid;
   const docRef = await addDoc(collection(db, "users", uid, "plants"), plant);
   return docRef.id;
+}
+
+export async function getPlants() {
+  await auth.authStateReady();
+  const uid = auth.currentUser!.uid;
+  const snapshot = await getDocs(collection(db, "users", uid, "plants"));
+  return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 }

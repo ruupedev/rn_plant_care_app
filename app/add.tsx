@@ -1,4 +1,4 @@
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, router } from "expo-router";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { Image } from "expo-image";
 import { styles } from "../styles/style";
@@ -48,6 +48,7 @@ export default function AddScreen() {
         imageUri,
       });
       console.log("Saved with id:", id);
+      router.back();
     } catch (error) {
       console.log("Save failed:", error);
     }

@@ -25,10 +25,10 @@ export default function RootLayout() {
           headerTintColor: colors.onPrimary,
         }}
       >
-        <Stack.Screen name="index" options={{ title: "Kasvini" }} />
-        <Stack.Screen name="details" options={{ title: "Tiedot" }} />
-        <Stack.Screen name="login" options={{ title: "Kirjaudu" }} />
-        <Stack.Screen name="add" options={{ title: "Lisää" }} />
+        <Stack.Screen name="index" options={{ title: "My Plants" }} />
+        <Stack.Screen name="details" options={{ title: "Details" }} />
+        <Stack.Screen name="login" options={{ title: "Login" }} />
+        <Stack.Screen name="add" options={{ title: "Add Plant" }} />
       </Stack>
     </PaperProvider>
   );
