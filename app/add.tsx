@@ -54,6 +54,10 @@ export default function AddScreen() {
     }
   };
 
+  const goBack = () => {
+    router.back();
+  };
+
   return (
     <SafeAreaProvider>
       <SafeAreaView>
@@ -94,7 +98,9 @@ export default function AddScreen() {
                   <Button mode="contained" onPress={save}>
                     YES
                   </Button>
-                  <Button mode="contained">NO</Button>
+                  <Button mode="contained" onPress={goBack}>
+                    NO
+                  </Button>
                 </View>
               </View>
             </Card.Content>

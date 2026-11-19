@@ -13,22 +13,40 @@ export default function HomeScreen() {
   const pickImage = async () => {
     const permissionResult =
       await ImagePicker.requestMediaLibraryPermissionsAsync();
-
     if (!permissionResult.granted) {
       Alert.alert("Permission to media library required");
       return;
     }
-
     let res = await ImagePicker.launchImageLibraryAsync();
-
     if (!res.canceled) {
       router.push({
         pathname: "/add",
         params: { imageUri: res.assets[0].uri },
       });
     }
+  };
 
-    /*  console.log(res); */
+  const takePhoto = async () => {
+    const permission = await ImagePicker.requestCameraPermissionsAsync();
+    if (!permission.granted) {
+      Alert.alert("Permission to camera required");
+      return;
+    }
+    const res = await ImagePicker.launchCameraAsync();
+    if (!res.canceled) {
+      router.push({
+        pathname: "/add",
+        params: { imageUri: res.assets[0].uri },
+      });
+    }
+  };
+
+  const onAddPress = () => {
+    Alert.alert("Add plant", "Choose image source", [
+      { text: "Camera", onPress: takePhoto },
+      { text: "Gallery", onPress: pickImage },
+      { text: "Cancel", style: "cancel" },
+    ]);
   };
 
   const [plants, setPlants] = useState<any[]>([]);
@@ -65,7 +83,7 @@ export default function HomeScreen() {
             </Card>
           )}
         />
-        <FAB style={styles.fab} small icon="plus" onPress={pickImage} />
+        <FAB style={styles.fab} small icon="plus" onPress={onAddPress} />
       </SafeAreaView>
     </SafeAreaProvider>
   );
