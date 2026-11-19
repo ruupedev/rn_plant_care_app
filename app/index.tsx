@@ -1,4 +1,4 @@
-import { Alert, FlatList, View } from "react-native";
+import { Alert, Button, FlatList, View } from "react-native";
 import { Link, router, useFocusEffect } from "expo-router";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { Card, FAB, IconButton, Text } from "react-native-paper";
@@ -72,9 +72,13 @@ export default function HomeScreen() {
                   style={styles.resultImage}
                   contentFit="cover"
                 />
-                <Text variant="titleMedium">{item.name}</Text>
+                <View>
+                  <Text variant="titleMedium">{item.name}</Text>
+                  <Text>{item.scientificName}</Text>
+                </View>
               </Card.Content>
               <Card.Actions>
+                <Button title="Details" />
                 <IconButton
                   icon="delete"
                   onPress={async () => setPlants(await deletePlant(item.id))}

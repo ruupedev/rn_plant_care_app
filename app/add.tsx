@@ -45,6 +45,7 @@ export default function AddScreen() {
     try {
       const id = await addPlant({
         name: result.species.commonNames[0],
+        scientificName: result.species.scientificNameWithoutAuthor,
         imageUri,
       });
       console.log("Saved with id:", id);
