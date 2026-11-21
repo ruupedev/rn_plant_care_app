@@ -41,6 +41,12 @@ export default function HomeScreen() {
     }
   };
 
+  const showDetails = async (id: string) => {
+    router.push({
+      pathname: `/plant/${id}`,
+    });
+  };
+
   const onAddPress = () => {
     Alert.alert("Add plant", "Choose image source", [
       { text: "Camera", onPress: takePhoto },
@@ -75,12 +81,10 @@ export default function HomeScreen() {
                 <View>
                   <Text variant="titleMedium">{item.name}</Text>
                   <Text>{item.scientificName}</Text>
-                  <Text>{item.watering}</Text>
-                  <Text>{item.sunlight}</Text>
                 </View>
               </Card.Content>
               <Card.Actions>
-                <Button title="Details" />
+                <Button title="Details" onPress={() => showDetails(item.id)} />
                 <IconButton
                   icon="delete"
                   onPress={async () => setPlants(await deletePlant(item.id))}

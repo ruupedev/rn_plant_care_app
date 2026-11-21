@@ -10,6 +10,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
   },
+
   fab: {
     position: "absolute",
     margin: 16,
@@ -37,6 +38,12 @@ export const styles = StyleSheet.create({
     width: 160,
     height: 160,
     borderRadius: 8,
+  },
+  detailImage: {
+    width: "100%",
+    aspectRatio: 1,
+    borderRadius: 8,
+    marginVertical: 16,
   },
   resultText: {
     flex: 1,
