@@ -7,6 +7,7 @@ import { File } from "expo-file-system";
 import { useState } from "react";
 import { Card, Button, Text } from "react-native-paper";
 import { addPlant } from "../types/plant";
+import { getPlantCare } from "../services/plantbook";
 
 const apiKeys = {
   plantNetApiKey: process.env.EXPO_PUBLIC_PLANTNET_API_KEY,
@@ -16,7 +17,7 @@ const apiKeys = {
 
 export default function AddScreen() {
   const { imageUri } = useLocalSearchParams<{ imageUri: string }>();
-  console.log("imageUri:", imageUri);
+  /*   console.log("imageUri:", imageUri); */
 
   const [result, setResult] = useState<any>(null);
 
@@ -34,7 +35,7 @@ export default function AddScreen() {
         },
       );
       const json = await res.json();
-      console.log(JSON.stringify(json.results[0], null, 2));
+      /*    console.log(JSON.stringify(json.results[0], null, 2)); */
       setResult(json.results[0]);
     } catch (error) {
       console.log("ERROR!", error);
@@ -42,13 +43,25 @@ export default function AddScreen() {
   };
 
   const save = async () => {
+    let instructions = null;
+    try {
+      instructions = await getPlantCare(
+        result.species.scientificNameWithoutAuthor.toLowerCase(),
+      );
+    } catch (error) {
+      console.log("ERROR!", error);
+    }
+
     try {
       const id = await addPlant({
         name: result.species.commonNames[0],
         scientificName: result.species.scientificNameWithoutAuthor,
+        watering: instructions?.[0] ?? null,
+        sunlight: instructions?.[1] ?? null,
         imageUri,
       });
-      console.log("Saved with id:", id);
+      /*    console.log("Saved with id:", id); */
+
       router.back();
     } catch (error) {
       console.log("Save failed:", error);

@@ -12,13 +12,16 @@ export type Plant = {
   imageUri: string;
   name: string;
   scientificName: string;
-  instructions: string;
+  watering: string;
+  sunlight: string;
 };
 
 export async function addPlant(plant: {
   name: string;
   scientificName: string;
   imageUri: string;
+  watering: string;
+  sunlight: string;
 }) {
   const uid = auth.currentUser!.uid;
   const docRef = await addDoc(collection(db, "users", uid, "plants"), plant);

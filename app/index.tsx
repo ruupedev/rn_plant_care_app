@@ -75,6 +75,8 @@ export default function HomeScreen() {
                 <View>
                   <Text variant="titleMedium">{item.name}</Text>
                   <Text>{item.scientificName}</Text>
+                  <Text>{item.watering}</Text>
+                  <Text>{item.sunlight}</Text>
                 </View>
               </Card.Content>
               <Card.Actions>
