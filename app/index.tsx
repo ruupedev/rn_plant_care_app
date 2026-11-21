@@ -55,6 +55,17 @@ export default function HomeScreen() {
     ]);
   };
 
+  const onDeletePlant = (id: string) => {
+    Alert.alert("Delete Plant", "This cannot be undone", [
+      { text: "Cancel", style: "cancel" },
+      {
+        text: "Delete",
+        style: "destructive",
+        onPress: async () => setPlants(await deletePlant(id)),
+      },
+    ]);
+  };
+
   const [plants, setPlants] = useState<any[]>([]);
   useFocusEffect(
     useCallback(() => {
@@ -71,25 +82,24 @@ export default function HomeScreen() {
           keyExtractor={(item) => item.id}
           contentContainerStyle={styles.list}
           renderItem={({ item }) => (
-            <Card style={styles.plantCard}>
+            <Card style={styles.plantCard} onPress={() => showDetails(item.id)}>
               <Card.Content style={styles.resultRow}>
                 <Image
                   source={item.imageUri}
                   style={styles.resultImage}
                   contentFit="cover"
                 />
-                <View>
+                <View style={styles.resultText}>
                   <Text variant="titleMedium">{item.name}</Text>
-                  <Text>{item.scientificName}</Text>
+                  <Text variant="bodySmall" style={styles.scientific}>
+                    {item.scientificName}
+                  </Text>
                 </View>
-              </Card.Content>
-              <Card.Actions>
-                <Button title="Details" onPress={() => showDetails(item.id)} />
                 <IconButton
-                  icon="delete"
-                  onPress={async () => setPlants(await deletePlant(item.id))}
+                  icon="delete-outline"
+                  onPress={() => onDeletePlant(item.id)}
                 />
-              </Card.Actions>
+              </Card.Content>
             </Card>
           )}
         />
