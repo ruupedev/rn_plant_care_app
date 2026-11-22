@@ -14,9 +14,11 @@ import { Image } from "expo-image";
 import { styles } from "../../styles/style";
 import { getPlant } from "../../types/plant";
 
+import { Plant } from "../../types/plant";
+
 export default function plantScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const [plant, setPlant] = useState<any>(null);
+  const [plant, setPlant] = useState<Plant | null>(null);
 
   useEffect(() => {
     getPlant(id).then(setPlant);

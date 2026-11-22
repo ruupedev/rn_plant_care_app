@@ -8,6 +8,7 @@ import { Image } from "expo-image";
 
 import { styles } from "../styles/style";
 import { getPlants, deletePlant } from "../types/plant";
+import { Plant } from "../types/plant";
 
 export default function HomeScreen() {
   const pickImage = async () => {
@@ -66,7 +67,7 @@ export default function HomeScreen() {
     ]);
   };
 
-  const [plants, setPlants] = useState<any[]>([]);
+  const [plants, setPlants] = useState<Plant[]>([]);
   useFocusEffect(
     useCallback(() => {
       getPlants().then(setPlants);

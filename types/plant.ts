@@ -9,7 +9,7 @@ import {
 import { db, auth } from "../services/firebase";
 
 export type Plant = {
-  id: number;
+  id: string;
   imageUri: string;
   name: string;
   scientificName: string;
@@ -33,14 +33,17 @@ export async function getPlants() {
   await auth.authStateReady();
   const uid = auth.currentUser!.uid;
   const snapshot = await getDocs(collection(db, "users", uid, "plants"));
-  return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+  return snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...(doc.data() as Omit<Plant, "id">),
+  }));
 }
 
 export async function getPlant(id: string) {
   await auth.authStateReady();
   const uid = auth.currentUser!.uid;
   const snapshot = await getDoc(doc(db, "users", uid, "plants", id));
-  return { id: snapshot.id, ...snapshot.data() };
+  return { id: snapshot.id, ...(snapshot.data() as Omit<Plant, "id">) };
 }
 
 export async function deletePlant(id: string) {
