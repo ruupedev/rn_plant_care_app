@@ -6,7 +6,7 @@ import { Alert, View } from "react-native";
 import { File } from "expo-file-system";
 import { useState } from "react";
 import { Card, Button, Text } from "react-native-paper";
-import { addPlant } from "../types/plant";
+import { addPlant } from "../services/plants";
 import { getPlantCare } from "../services/plantbook";
 
 const apiKeys = {

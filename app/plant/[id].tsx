@@ -12,7 +12,7 @@ import { useState, useCallback, useEffect } from "react";
 import { Image } from "expo-image";
 
 import { styles } from "../../styles/style";
-import { getPlant } from "../../types/plant";
+import { getPlant } from "../../services/plants";
 
 import { Plant } from "../../types/plant";
 

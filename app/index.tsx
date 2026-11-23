@@ -7,7 +7,7 @@ import { useState, useCallback } from "react";
 import { Image } from "expo-image";
 
 import { styles } from "../styles/style";
-import { getPlants, deletePlant } from "../types/plant";
+import { getPlants, deletePlant } from "../services/plants";
 import { Plant } from "../types/plant";
 
 export default function HomeScreen() {
