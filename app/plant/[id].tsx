@@ -1,19 +1,12 @@
-import { Alert, Button, FlatList, View } from "react-native";
-import {
-  Link,
-  router,
-  useFocusEffect,
-  useLocalSearchParams,
-} from "expo-router";
+import { View } from "react-native";
+import { useLocalSearchParams } from "expo-router";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import { Card, FAB, IconButton, Text } from "react-native-paper";
-
-import { useState, useCallback, useEffect } from "react";
+import { Text } from "react-native-paper";
+import { useState, useEffect } from "react";
 import { Image } from "expo-image";
 
 import { styles } from "../../styles/style";
 import { getPlant } from "../../services/plants";
-
 import { Plant } from "../../types/plant";
 
 export default function plantScreen() {

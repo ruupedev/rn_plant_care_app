@@ -1,5 +1,5 @@
-import { Alert, Button, FlatList, View } from "react-native";
-import { Link, router, useFocusEffect } from "expo-router";
+import { Alert, FlatList, View } from "react-native";
+import { router, useFocusEffect } from "expo-router";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { Card, FAB, IconButton, Text } from "react-native-paper";
 import * as ImagePicker from "expo-image-picker";
@@ -77,7 +77,6 @@ export default function HomeScreen() {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
-        {/* <Link href="/details">Avaa details</Link> */}
         <FlatList
           data={plants}
           keyExtractor={(item) => item.id}

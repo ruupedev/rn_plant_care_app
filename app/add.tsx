@@ -2,12 +2,12 @@ import { useLocalSearchParams, router } from "expo-router";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { Image } from "expo-image";
 import { styles } from "../styles/style";
-import { Alert, View } from "react-native";
 import { File } from "expo-file-system";
 import { useState } from "react";
 import { Card, Button, Text } from "react-native-paper";
 import { addPlant } from "../services/plants";
 import { getPlantCare } from "../services/plantbook";
+import { View } from "react-native";
 
 const apiKeys = {
   plantNetApiKey: process.env.EXPO_PUBLIC_PLANTNET_API_KEY,
@@ -17,7 +17,6 @@ const apiKeys = {
 
 export default function AddScreen() {
   const { imageUri } = useLocalSearchParams<{ imageUri: string }>();
-  /*   console.log("imageUri:", imageUri); */
 
   const [result, setResult] = useState<any>(null);
 
@@ -35,7 +34,6 @@ export default function AddScreen() {
         },
       );
       const json = await res.json();
-      /*    console.log(JSON.stringify(json.results[0], null, 2)); */
       setResult(json.results[0]);
     } catch (error) {
       console.log("ERROR!", error);
@@ -60,7 +58,6 @@ export default function AddScreen() {
         sunlight: instructions?.[1] ?? null,
         imageUri,
       });
-      /*    console.log("Saved with id:", id); */
 
       router.back();
     } catch (error) {
@@ -78,11 +75,10 @@ export default function AddScreen() {
         <Image
           style={styles.image}
           source={imageUri}
-          /*  placeholder={{ blurhash }} */
           contentFit="cover"
           transition={1000}
         />
-        {/*  <Button onPress={identify} title="Fetch" /> */}
+
         <Button
           mode="contained"
           style={{ width: "90%", margin: "auto" }}
